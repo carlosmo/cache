@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Wrapping the layout into /layout to make it available with data binding. -->
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Data to make available to the XML via data binding. In this case,
+         the whole ViewModel, so that we can access the LiveData,
+         click handlers, and state variables. -->
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.example.cache.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <!-- Start of the visible fragment layout using ConstraintLayout -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="18dp"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            tools:context=".ui.home.HomeFragment">
+
+            <TextView
+            android:id="@+id/home_greeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            tools:text="@string/text_home_greeting_morning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_settings"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                app:layout_constraintTop_toTopOf="@+id/home_greeting"
+                app:layout_constraintBottom_toBottomOf="@+id/home_greeting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_settings"
+                android:contentDescription="@string/content_description_settings" />
+
+            <TextView
+                android:id="@+id/heading_accounts_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/heading_accounts_overview"
+                app:layout_constraintTop_toBottomOf="@+id/home_greeting"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                android:id="@+id/button_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:contentDescription="@string/content_description_more"
+                app:layout_constraintBottom_toBottomOf="@+id/heading_accounts_overview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/heading_accounts_overview"
+                app:srcCompat="@drawable/ic_more" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/accounts_overview_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:elevation="2dp"
+                android:background="@drawable/background_list"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading_accounts_overview" />
+
+            <TextView
+                android:id="@+id/heading_investments_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/heading_investments_overview"
+                app:layout_constraintTop_toBottomOf="@+id/accounts_overview_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/background_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading_investments_overview">
+
+                <TextView
+                    android:id="@+id/label_total_invested"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_total_invested"
+                    android:padding="18dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/total_invested"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    tools:text="36868.25"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <View
+                    style="@style/Divider"
+                    android:id="@+id/divider1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_total_invested" />
+
+                <TextView
+                android:id="@+id/label_total_savings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="18dp"
+                android:text="@string/label_total_savings"
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/total_savings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="18dp"
+                    tools:text="60000"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <View
+                    style="@style/Divider"
+                    android:id="@+id/divider2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/label_total_savings" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/view_portfolios_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2">
+
+                    <TextView
+                        android:id="@+id/label_view_portfolios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_view_portfolios"
+                        android:textStyle="bold"
+                        android:textColor="@color/tealish"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/right_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:srcCompat="@drawable/ic_right_arrow_tealish"
+                        android:contentDescription="@string/content_description_details" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
